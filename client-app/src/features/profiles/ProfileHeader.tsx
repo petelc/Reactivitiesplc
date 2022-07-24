@@ -7,10 +7,9 @@ import {
   Header,
   Statistic,
   Divider,
-  Reveal,
-  Button,
 } from 'semantic-ui-react';
 import { Profile } from '../../app/models/profile';
+import FollowButton from './FollowButton';
 
 interface Props {
   profile: Profile;
@@ -36,23 +35,11 @@ export default observer(function ProfileHeader({ profile }: Props) {
         </Grid.Column>
         <Grid.Column width={4}>
           <Statistic.Group widths={2}>
-            <Statistic label='followers' value='5' />
-            <Statistic label='following' value='42' />
+            <Statistic label='followers' value={profile.followersCount} />
+            <Statistic label='following' value={profile.followingCount} />
           </Statistic.Group>
           <Divider />
-          <Reveal animated='move'>
-            <Reveal.Content visible style={{ width: '100%' }}>
-              <Button fluid color='teal' content='Following' />
-            </Reveal.Content>
-            <Reveal.Content hidden style={{ width: '100%' }}>
-              <Button
-                fluid
-                basic
-                color={true ? 'red' : 'green'}
-                content={true ? 'Un-Follow' : 'Follow'}
-              />
-            </Reveal.Content>
-          </Reveal>
+          <FollowButton profile={profile} />
         </Grid.Column>
       </Grid>
     </Segment>
